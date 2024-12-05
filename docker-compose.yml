@@ -1,0 +1,36 @@
+services:
+  rafflefy:
+    build:
+      context: .
+      target: build
+    restart: unless-stopped
+    container_name: rafflefy
+    command: mix phx.server
+    depends_on:
+      - rafflefy_db
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/app
+    networks:
+      - rafflefy_net
+
+  rafflefy_db:
+    image: "postgres:13"
+    container_name: rafflefy_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - "rafflefy_db:/var/lib/postgresql/data"
+    networks:
+      - rafflefy_net
+
+volumes:
+  rafflefy_db:
+
+networks:
+  rafflefy_net:
+    name: rafflefy_net
