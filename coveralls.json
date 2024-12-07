@@ -1,0 +1,18 @@
+{
+  "skip_files": [
+    "lib/rafflefy/application.ex",
+    "lib/rafflefy/release.ex",
+    "lib/rafflefy/telemetry.ex",
+    "lib/rafflefy_web.ex",
+    "lib/rafflefy_web/telemetry.ex",
+    "lib/rafflefy_web/channels/user_socket.ex",
+    "lib/rafflefy/views/error_helpers.ex",
+    "test/support/channel_case.ex",
+    "test/support/data_case.ex"
+  ],
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "cover/",
+    "minimum_coverage": 75
+  }
+}
