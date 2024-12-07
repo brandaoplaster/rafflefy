@@ -1,0 +1,22 @@
+FROM elixir:1.15.7-alpine AS dev
+
+RUN apk add --no-cache build-base git openssh-client inotify-tools
+
+ARG mix_env="dev"
+ENV MIX_ENV=$mix_env
+
+WORKDIR /app
+
+COPY mix.exs mix.lock ./
+RUN mix local.hex --force && mix local.rebar --force
+RUN mix deps.get && mix deps.compile
+
+COPY lib/ priv/ config/ .formatter.exs .credo.exs start.sh ./
+RUN chmod +x ./start.sh
+
+RUN mix archive.install hex credo --force
+RUN mix dialyzer --plt
+
+EXPOSE 4000
+
+CMD ["sh", "./start.sh"]

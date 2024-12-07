@@ -2,7 +2,7 @@ services:
   rafflefy:
     build:
       context: .
-      target: build
+      dockerfile: Dockerfile.dev
     restart: unless-stopped
     container_name: rafflefy
     command: mix phx.server
