@@ -20,5 +20,5 @@ defmodule RafflefyWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, backend: Rafflefy.Gettext
+  use Gettext.Backend, otp_app: :rafflefy
 end
