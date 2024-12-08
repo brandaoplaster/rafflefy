@@ -5,6 +5,5 @@ defmodule RafflefyWeb.PageHTML do
   See the `page_html` directory for all templates available.
   """
   use RafflefyWeb, :html
-
   embed_templates "page_html/*"
 end
