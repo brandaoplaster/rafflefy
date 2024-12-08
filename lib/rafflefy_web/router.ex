@@ -18,6 +18,7 @@ defmodule RafflefyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/estimator", EstimatorLive
   end
 
   # Other scopes may use custom stacks.
