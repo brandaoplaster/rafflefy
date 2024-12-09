@@ -11,6 +11,12 @@ defmodule RafflefyWeb.EstimatorLive do
     {:noreply, socket}
   end
 
+  def handle_event("set_price", %{"price" => price}, socket) do
+    socket = assign(socket, :price, String.to_integer(price))
+
+    {:noreply, socket}
+  end
+
   def render(assigns) do
     ~H"""
       <div class="estimator">
@@ -31,6 +37,11 @@ defmodule RafflefyWeb.EstimatorLive do
           $<%= @tickets * @price %>
           </div>
         </section>
+
+        <form phx-submit="set_price">
+          <label for="price">Ticket Price</label>
+          <input type="number" name="price" value={@price} />
+        </form>
       </div>
     """
   end
