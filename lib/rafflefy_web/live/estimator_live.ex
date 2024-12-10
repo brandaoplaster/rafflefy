@@ -2,6 +2,10 @@ defmodule RafflefyWeb.EstimatorLive do
   use RafflefyWeb, :live_view
 
   def mount(_params, _session, socket) do
+    if connected?(socket) do
+      Process.send_after(self(), :tick, 2000)
+    end
+
     {:ok, assign(socket, tickets: 0, price: 3)}
   end
 
@@ -9,6 +13,17 @@ defmodule RafflefyWeb.EstimatorLive do
     socket = update(socket, :tickets, &(&1 + String.to_integer(quantity)))
 
     {:noreply, socket}
+  end
+
+  def handle_event("set_price", %{"price" => price}, socket) do
+    socket = assign(socket, :price, String.to_integer(price))
+
+    {:noreply, socket}
+  end
+
+  def handle_info(:tick, socket) do
+    Process.send_after(self(), :tick, 2000)
+    {:noreply, update(socket, :tickets, &(&1 + 10))}
   end
 
   def render(assigns) do
@@ -31,6 +46,11 @@ defmodule RafflefyWeb.EstimatorLive do
           $<%= @tickets * @price %>
           </div>
         </section>
+
+        <form phx-submit="set_price">
+          <label for="price">Ticket Price</label>
+          <input type="number" name="price" value={@price} />
+        </form>
       </div>
     """
   end
