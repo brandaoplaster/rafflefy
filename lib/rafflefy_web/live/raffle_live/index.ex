@@ -19,13 +19,19 @@ defmodule RafflefyWeb.RaffleLive.Index do
             <div class="price">
               $<%= raffle.ticket_price %> / ticket
             </div>
-            <div class="badge">
-              <%= raffle.status %>
-            </div>
+            <.badge status={raffle.status} />
           </div>
         </div>
       </div>
     </div>
+    """
+  end
+
+  def badge(assigns) do
+    ~H"""
+      <div class="badge">
+        <%= @status %>
+      </div>
     """
   end
 end
