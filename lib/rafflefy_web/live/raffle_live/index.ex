@@ -4,7 +4,7 @@ defmodule RafflefyWeb.RaffleLive.Index do
   alias Rafflefy.Raffles
 
   def mount(_params, _session, socket) do
-    socket = assign(socket, :reffles, Raffles.list_raffles())
+    socket = assign(socket, :raffles, Raffles.list_raffles())
     {:ok, socket}
   end
 
