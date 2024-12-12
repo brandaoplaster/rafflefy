@@ -1,6 +1,7 @@
 defmodule RafflefyWeb.RaffleLive.Index do
   use RafflefyWeb, :live_view
 
+  import RafflefyWeb.CustomComponents
   alias Rafflefy.Raffles
 
   def mount(_params, _session, socket) do
@@ -15,16 +16,6 @@ defmodule RafflefyWeb.RaffleLive.Index do
         <.raffle_card :for={raffle <- @raffles} raffle={raffle} />
       </div>
     </div>
-    """
-  end
-
-  attr :status, :atom, required: true, values: [:upcoming, :open, :closed]
-
-  def badge(assigns) do
-    ~H"""
-      <div class="badge">
-        <%= @status %>
-      </div>
     """
   end
 
