@@ -1,4 +1,4 @@
-defmodule RafflefyWeb.Live.RaffleLive.Show do
+defmodule RafflefyWeb.RaffleLive.Show do
   use RafflefyWeb, :live_view
 
   import RafflefyWeb.CustomComponents
