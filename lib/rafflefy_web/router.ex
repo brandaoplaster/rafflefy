@@ -20,6 +20,7 @@ defmodule RafflefyWeb.Router do
     get "/", PageController, :home
     live "/estimator", EstimatorLive
     live "/raffles", RaffleLive.Index
+    live "/raffles/:id", RaffleLive.Show
   end
 
   # Other scopes may use custom stacks.
