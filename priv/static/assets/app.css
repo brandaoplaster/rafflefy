@@ -1173,6 +1173,305 @@ header a:focus {
   width: 1.5rem;
 }
 
+.raffle-show .winner {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: #06b6d4 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(6 182 212 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: #3b82f6 var(--tw-gradient-to-position);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.raffle-show .raffle {
+  margin-bottom: 2.5rem;
+  display: grid;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .raffle-show .raffle {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.raffle-show .raffle img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (min-width: 768px) {
+  .raffle-show .raffle img {
+    width: 100%;
+  }
+}
+
+.raffle-show .raffle section > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+
+@media (min-width: 768px) {
+  .raffle-show .raffle section {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.raffle-show .raffle section header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.raffle-show .raffle section header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.raffle-show .raffle section header h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.raffle-show .raffle section header .price {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.raffle-show .raffle section .totals {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.raffle-show .raffle section .description {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 300;
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.raffle-show .activity {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .raffle-show .activity {
+    margin-left: 5rem;
+  }
+}
+
+.raffle-show .activity .left {
+  justify-self: start;
+}
+
+.raffle-show .activity .right {
+  width: 16rem;
+}
+
+.raffle-show .activity .right > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.raffle-show .activity .right {
+  justify-self: end;
+  text-align: center;
+}
+
+.raffle-show .activity .right h4 {
+  border-bottom-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  padding-bottom: 0.375rem;
+  text-align: left;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.raffle-show .activity .change-status {
+  margin-top: 0.5rem;
+}
+
+.raffle-show .activity .change-status a {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(2 132 199 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.raffle-show .activity .change-status a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
+}
+
+.raffle-show .activity .change-status #emojis {
+  margin-top: 0.5rem;
+  display: flex;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.raffle-show .activity .change-status #emojis > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.raffle-show .activity .change-status #emojis {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.raffle-show .activity .change-status #emojis span {
+  display: inline-block;
+  cursor: pointer;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.raffle-show .activity .change-status #emojis span:hover {
+  --tw-scale-x: 1.25;
+  --tw-scale-y: 1.25;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.raffle-show #ticket-form > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+@media (min-width: 768px) {
+  .raffle-show #ticket-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .raffle-show #ticket-form > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+}
+
+.raffle-show #ticket-form input[type="text"] {
+  margin-top: 0px;
+}
+
+.raffle-show #tickets {
+  margin-top: 2rem;
+}
+
+.raffle-show .ticket {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.raffle-show .ticket:not(:last-child) .timeline {
+  position: absolute;
+  left: 1.25rem;
+  top: 1rem;
+  margin-left: -1px;
+  height: 100%;
+  width: 0.125rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.raffle-show .ticket section {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.raffle-show .ticket section > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.raffle-show .ticket section {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.raffle-show .ticket section .price-paid {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 132 199 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.raffle-show .ticket section .username {
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.raffle-show .ticket section blockquote {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-style: italic;
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
