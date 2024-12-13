@@ -112,4 +112,112 @@
   .banner svg {
     @apply inline-flex w-6 h-6;
   }
+
+  .raffle-show .winner {
+    @apply mx-auto mb-8 p-6 text-center text-2xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-extrabold;
+  }
+
+  .raffle-show .raffle {
+    @apply grid md:grid-cols-3 gap-x-4 mb-10;
+  }
+
+  .raffle-show .raffle img {
+    @apply mx-auto w-1/2 px-8 md:w-full;
+  }
+
+  .raffle-show .raffle section {
+    @apply md:col-span-2 space-y-5;
+  }
+
+  .raffle-show .raffle section header {
+    @apply flex justify-between items-start;
+  }
+
+  .raffle-show .raffle section header h2 {
+    @apply flex items-center gap-2 text-2xl font-semibold text-gray-900;
+  }
+
+  .raffle-show .raffle section header h3 {
+    @apply text-xl text-gray-500;
+  }
+
+  .raffle-show .raffle section header .price {
+    @apply text-2xl font-medium text-gray-900;
+  }
+
+  .raffle-show .raffle section .totals {
+    @apply font-medium text-gray-600 flex items-center;
+  }
+
+  .raffle-show .raffle section .description {
+    @apply text-gray-500 font-light text-lg;
+  }
+
+  .raffle-show .activity {
+    @apply grid grid-cols-2 mx-auto md:ml-20;
+  }
+
+  .raffle-show .activity .left {
+    @apply justify-self-start;
+  }
+
+  .raffle-show .activity .right {
+    @apply text-center justify-self-end space-y-8 w-64;
+  }
+
+  .raffle-show .activity .right h4 {
+    @apply text-lg text-gray-600 font-medium text-left pb-1.5 border-b-2 border-gray-200;
+  }
+
+  .raffle-show .activity .change-status {
+    @apply mt-2;
+  }
+
+  .raffle-show .activity .change-status a {
+    @apply text-xs text-sky-600 hover:text-sky-800 transition ease-in-out duration-150;
+  }
+
+  .raffle-show .activity .change-status #emojis {
+    @apply hidden flex items-center justify-center space-x-3 text-xl mt-2;
+  }
+
+  .raffle-show .activity .change-status #emojis span {
+    @apply inline-block hover:scale-125 transition duration-300 cursor-pointer;
+  }
+
+  .raffle-show #ticket-form {
+    @apply space-y-2 md:flex md:items-center md:space-x-2 md:space-y-0;
+  }
+
+  .raffle-show #ticket-form input[type="text"] {
+    @apply mt-0;
+  }
+
+  .raffle-show #tickets {
+    @apply mt-8;
+  }
+
+  .raffle-show .ticket {
+    @apply relative pb-8;
+  }
+
+  .raffle-show .ticket:not(:last-child) .timeline {
+    @apply absolute left-5 top-4 -ml-px h-full w-0.5 bg-gray-200;
+  }
+
+  .raffle-show .ticket section {
+    @apply relative flex items-center space-x-3 text-base text-gray-500;
+  }
+
+  .raffle-show .ticket section .price-paid {
+    @apply h-10 w-10 rounded-full bg-sky-600 flex items-center justify-center text-white;
+  }
+
+  .raffle-show .ticket section .username {
+    @apply font-medium text-gray-900;
+  }
+
+  .raffle-show .ticket section blockquote {
+    @apply mt-1 text-base italic text-gray-600;
+  }
 }
