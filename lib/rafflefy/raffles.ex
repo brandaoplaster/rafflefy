@@ -41,4 +41,9 @@ defmodule Rafflefy.Raffles do
     |> String.to_integer()
     |> get_raffle()
   end
+
+  def featured_raffles(raffle) do
+    list_raffles()
+    |> List.delete(raffle)
+  end
 end
