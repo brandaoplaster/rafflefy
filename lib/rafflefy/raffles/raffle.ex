@@ -1,4 +1,4 @@
-defmodule Rafflefy.Raffles.Raflle do
+defmodule Rafflefy.Raffles.Raffle do
   use Ecto.Schema
   import Ecto.Changeset
 
