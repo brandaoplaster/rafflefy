@@ -220,4 +220,20 @@
   .raffle-show .ticket section blockquote {
     @apply mt-1 text-base italic text-gray-600;
   }
+
+  ul.raffles {
+    @apply mt-4 space-y-3 ml-2;
+  }
+
+  ul.raffles li {
+    @apply flex items-center gap-x-2 text-sm;
+  }
+
+  ul.raffles li img {
+    @apply w-10;
+  }
+
+  ul.raffles li a {
+    @apply flex items-center gap-x-2 text-sky-600 font-medium hover:text-sky-800 transition ease-in-out duration-150;
+  }
 }

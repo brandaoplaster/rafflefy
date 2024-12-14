@@ -16,6 +16,7 @@ defmodule RafflefyWeb.RaffleLive.Show do
       socket
       |> assign(:raffle, raffle)
       |> assign(:page_title, raffle.prize)
+      |> assign(:featured_raffles, Raffles.featured_raffles(raffle))
 
     {:noreply, socket}
   end
@@ -41,9 +42,25 @@ defmodule RafflefyWeb.RaffleLive.Show do
         <div class="activity">
           <div class="left"></div>
           <div class="right">
+            <.featured_raffles raffles={@featured_raffles} />
           </div>
         </div>
       </div>
+    """
+  end
+
+  def featured_raffles(assigns) do
+    ~H"""
+      <section>
+        <h4>Feature Raffles</h4>
+        <ul class="raffles">
+          <li :for={raffle <- @raffles}>
+            <.link navigate={~p"/raffles/#{raffle}"}>
+              <img src={raffle.image_path} /> <%= raffle.prize %>
+            </.link>
+          </li>
+        </ul>
+      </section>
     """
   end
 end
