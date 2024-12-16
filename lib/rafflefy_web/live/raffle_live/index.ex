@@ -26,26 +26,41 @@ defmodule RafflefyWeb.RaffleLive.Index do
           </:details>
         </.banner>
 
-        <.form for={@form}>
-          <.input field={@form[:q]} placeholder="Search" autocomplete="off" />
-          <.input
-            type="select"
-            field={@form[:status]}
-            prompt="Status"
-            options={[:upcoming, :open, :closed]}
-          />
-          <.input
-            type="select"
-            field={@form[:sort_by]}
-            prompt="Sort By"
-            options={[:prize, :ticket_price]}
-          />
-        </.form>
+        <.filter_form form={@form} />
 
         <div class="raffles" id="raffles" phx-update="stream">
           <.raffle_card :for={{dom_id, raffle} <- @streams.raffles} raffle={raffle} id={dom_id} />
         </div>
       </div>
+    """
+  end
+
+  def handle_event("filter", params, socket) do
+    socket =
+      socket
+      |> assign(:form, to_form(params))
+      |> stream(:raffles, Raffles.filter_raffles(params), reset: true)
+
+    {:noreply, socket}
+  end
+
+  def filter_form(assigns) do
+    ~H"""
+      <.form for={@form} phx-change="filter" id="filter-form">
+        <.input field={@form[:q]} placeholder="Search" autocomplete="off" />
+        <.input
+          type="select"
+          field={@form[:status]}
+          prompt="Status"
+          options={[:upcoming, :open, :closed]}
+        />
+        <.input
+          type="select"
+          field={@form[:sort_by]}
+          prompt="Sort By"
+          options={[:prize, :ticket_price]}
+        />
+      </.form>
     """
   end
 
