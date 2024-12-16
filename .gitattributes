@@ -1,0 +1,6 @@
+assets/js/* linguist-vendored
+assets/css/* linguist-vendored
+priv/static/* linguist-vendored
+
+*.ex linguist-detectable
+*.exs linguist-detectable
