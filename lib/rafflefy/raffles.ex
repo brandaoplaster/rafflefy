@@ -23,4 +23,11 @@ defmodule Rafflefy.Raffles do
     |> limit(3)
     |> Repo.all()
   end
+
+  def filter_raffles do
+    Raffle
+    |> where(status: :closed)
+    |> order_by(:prize)
+    |> Repo.all()
+  end
 end
