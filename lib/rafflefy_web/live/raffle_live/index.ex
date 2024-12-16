@@ -5,7 +5,10 @@ defmodule RafflefyWeb.RaffleLive.Index do
   alias Rafflefy.Raffles
 
   def mount(_params, _session, socket) do
-    socket = stream(socket, :raffles, Raffles.list_raffles())
+    socket =
+      socket
+      |> stream(:raffles, Raffles.list_raffles())
+      |> assign(:form, to_form(%{}))
     {:ok, socket}
   end
 
@@ -22,10 +25,46 @@ defmodule RafflefyWeb.RaffleLive.Index do
             Any guesses?
           </:details>
         </.banner>
+
+        <.filter_form form={@form} />
+
         <div class="raffles" id="raffles" phx-update="stream">
           <.raffle_card :for={{dom_id, raffle} <- @streams.raffles} raffle={raffle} id={dom_id} />
         </div>
       </div>
+    """
+  end
+
+  def handle_event("filter", params, socket) do
+    socket =
+      socket
+      |> assign(:form, to_form(params))
+      |> stream(:raffles, Raffles.filter_raffles(params), reset: true)
+
+    {:noreply, socket}
+  end
+
+  def filter_form(assigns) do
+    ~H"""
+      <.form for={@form} phx-change="filter" id="filter-form">
+        <.input field={@form[:q]} placeholder="Search" autocomplete="off" phx-debounce="500" />
+        <.input
+          type="select"
+          field={@form[:status]}
+          prompt="Status"
+          options={[:upcoming, :open, :closed]}
+        />
+        <.input
+          type="select"
+          field={@form[:sort_by]}
+          prompt="Sort By"
+          options={[
+            Prize: "prize",
+            "Price: High to Low": "ticket_price_desc",
+            "Price: Low to High": "ticket_price_asc"
+          ]}
+        />
+      </.form>
     """
   end
 

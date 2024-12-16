@@ -24,10 +24,37 @@ defmodule Rafflefy.Raffles do
     |> Repo.all()
   end
 
-  def filter_raffles do
+  def filter_raffles(params) do
     Raffle
-    |> where(status: :closed)
-    |> order_by(:prize)
+    |> with_status(params["status"])
+    |> search_by(params["q"])
+    |> sort(params["sort_by"])
     |> Repo.all()
   end
+
+  defp with_status(query, status) when status in ~w(open closed upcoming) do
+    where(query, status: ^status)
+  end
+
+  defp with_status(query, _), do: query
+
+  defp search_by(query, q) when q in ["", nil], do: query
+
+  defp search_by(query, q) do
+    where(query, [r], ilike(r.prize, ^"%#{q}%"))
+  end
+
+  defp sort(query, "prize") do
+    order_by(query, :prize)
+  end
+
+  defp sort(query, "ticket_price_desc") do
+    order_by(query, desc: :ticket_price)
+  end
+
+  defp sort(query, "ticket_price_asc") do
+    order_by(query, asc: :ticket_price)
+  end
+
+  defp sort(query, _), do: order_by(query, :id)
 end
