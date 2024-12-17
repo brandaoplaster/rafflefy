@@ -5,11 +5,16 @@ defmodule RafflefyWeb.RaffleLive.Index do
   alias Rafflefy.Raffles
 
   def mount(_params, _session, socket) do
+    {:ok, socket}
+  end
+
+  def handle_params(params, _uri, socket) do
     socket =
       socket
-      |> stream(:raffles, Raffles.list_raffles())
-      |> assign(:form, to_form(%{}))
-    {:ok, socket}
+      |> stream(:raffles, Raffles.filter_raffles(params))
+      |> assign(:form, to_form(params))
+
+    {:noreply, socket}
   end
 
   def render(assigns) do
@@ -36,10 +41,12 @@ defmodule RafflefyWeb.RaffleLive.Index do
   end
 
   def handle_event("filter", params, socket) do
-    socket =
-      socket
-      |> assign(:form, to_form(params))
-      |> stream(:raffles, Raffles.filter_raffles(params), reset: true)
+    params =
+      params
+      |> Map.take(~w(q status sort_by))
+      |> Map.reject(fn {_, v} -> v == "" end)
+
+    socket = push_navigate(socket, to: ~p"/raffles?#{params}")
 
     {:noreply, socket}
   end
@@ -64,6 +71,10 @@ defmodule RafflefyWeb.RaffleLive.Index do
             "Price: Low to High": "ticket_price_asc"
           ]}
         />
+
+        <.link navigate={~p"/raffles"}>
+          Reset
+        </.link>
       </.form>
     """
   end
