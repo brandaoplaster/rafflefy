@@ -4,6 +4,12 @@ defmodule Rafflefy.Raffles do
   alias Rafflefy.Raffles.Raffle
   alias Rafflefy.Repo
 
+  def create_raffle(attrs \\ %{}) do
+    %Raffle{}
+    |> Raffle.changeset(attrs)
+    |> Repo.insert()
+  end
+
   def list_raffles do
     Repo.all(Raffle)
   end
