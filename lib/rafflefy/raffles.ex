@@ -10,6 +10,10 @@ defmodule Rafflefy.Raffles do
     |> Repo.insert()
   end
 
+  def change_raffle(%Raffle{} = raffle, attrs \\ %{}) do
+    Raffle.changeset(raffle, attrs)
+  end
+
   def list_raffles do
     Repo.all(Raffle)
   end
