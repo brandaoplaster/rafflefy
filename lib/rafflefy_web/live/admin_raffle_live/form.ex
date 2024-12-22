@@ -5,10 +5,12 @@ defmodule RafflefyWeb.AdminRaffleLive.Form do
   alias Rafflefy.Raffles.Raffle
 
   def mount(_params, _session, socket) do
+    changeset = Raffles.change_raffle(%Raffle{})
+
     socket =
       socket
       |> assign(:page_title, "New Raffle")
-      |> assign(:form, to_form(%{}, as: "raffle"))
+      |> assign(:form, to_form(changeset))
 
     {:ok, socket}
   end
@@ -47,8 +49,24 @@ defmodule RafflefyWeb.AdminRaffleLive.Form do
   end
 
   def handle_event("validate", %{"raffle" => raffle_params}, socket) do
-    changeset = Raffles.create_raffle(raffle_params)
+    changeset = Raffles.change_raffle(%Raffle{}, raffle_params)
     socket = assign(socket, :form, to_form(changeset, action: :validate))
     {:noreply, socket}
+  end
+
+  def handle_event("save", %{"raffle" => raffle_params}, socket) do
+    case Raffles.create_raffle(raffle_params) do
+      {:ok, _raffle} ->
+        socket =
+          socket
+          |> put_flash(:info, "Raffle created successfully!")
+          |> push_navigate(to: ~p"/admin/raffles")
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        socket = assign(socket, :form, to_form(changeset))
+        {:noreply, socket}
+    end
   end
 end
