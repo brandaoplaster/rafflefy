@@ -12,7 +12,7 @@ erl_crash.dump
 *.beam
 /config/*.secret.exs
 .elixir_ls/
-# /priv/static/assets/*
+/priv/static/assets/*
 
 ### Elixir Patch ###
 
