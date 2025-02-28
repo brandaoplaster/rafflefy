@@ -15,6 +15,17 @@ defmodule RafflefyWeb.AdminRaffleLive.Form do
     {:ok, socket}
   end
 
+  def apply_action(socket, :edit, %{"id" => id}) do
+    raffle = Raffles.get_raffle(id)
+
+    changeset = Raffles.change_raffle(raffle)
+
+    socket
+    |> assign(:page_title, "Edit Raffle")
+    |> assign(:form, to_form(changeset))
+    |> assign(:raffle, raffle)
+  end
+
   def render(assigns) do
     ~H"""
       <.header>
@@ -60,6 +71,22 @@ defmodule RafflefyWeb.AdminRaffleLive.Form do
         socket =
           socket
           |> put_flash(:info, "Raffle created successfully!")
+          |> push_navigate(to: ~p"/admin/raffles")
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        socket = assign(socket, :form, to_form(changeset))
+        {:noreply, socket}
+    end
+  end
+
+  defp save_raffle(socket, :edit, params) do
+    case Raffles.create_raffle(params) do
+      {:ok, _raffle} ->
+        socket =
+          socket
+          |> put_flash(:info, "Raffle updated successfully!")
           |> push_navigate(to: ~p"/admin/raffles")
 
         {:noreply, socket}
