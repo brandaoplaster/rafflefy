@@ -25,6 +25,10 @@ defmodule Rafflefy.Raffles do
     end
   end
 
+  def delete_raffle(%Raffle{} = raffle) do
+    Repo.delete(raffle)
+  end
+
   def featured_raffles(raffle) do
     Raffle
     |> where(status: :open)
