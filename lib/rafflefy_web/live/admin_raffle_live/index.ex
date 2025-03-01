@@ -2,14 +2,22 @@ defmodule RafflefyWeb.AdminRaffleLive.Index do
   use RafflefyWeb, :live_view
 
   import RafflefyWeb.CustomComponents
+  alias Rafflefy.Raffles
 
   def mount(_params, _session, socket) do
     socket =
       socket
       |> assign(:page_title, "Listing Raffles")
-      |> stream(:raffles, Rafflefy.Raffles.list_raffles())
+      |> stream(:raffles, Raffles.list_raffles())
 
     {:ok, socket}
+  end
+
+  def handle_event("delete", %{"id" => id}, socket) do
+    raffle = Raffles.get_raffle(id)
+    {:ok, _} = Raffles.delete_raffle(raffle)
+
+    {:noreply, stream(socket, :reffles, raffle)}
   end
 
   def render(assigns) do
@@ -38,6 +46,11 @@ defmodule RafflefyWeb.AdminRaffleLive.Index do
         <:action :let={{_dom_id, raffle}}>
           <.link navigate={~p"/admin/raffles/#{raffle}/edit"}>
             Edit
+          </.link>
+        </:action>
+        <:action :let={{_dom_id, raffle}}>
+          <.link phx-click="delete" phx-value-id={raffle.id} data-confirm="Are you sure?">
+            Delete
           </.link>
         </:action>
       </.table>
