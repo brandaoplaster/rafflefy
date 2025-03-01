@@ -65,8 +65,12 @@ defmodule RafflefyWeb.AdminRaffleLive.Form do
     {:noreply, socket}
   end
 
-  def handle_event("save", %{"raffle" => raffle_params}, socket) do
-    case Raffles.create_raffle(raffle_params) do
+  def handle_event("save", %{"raffle" => params}, socket) do
+    save_raffle(socket, socket.assigns.live_action, params)
+  end
+
+  defp save_raffle(socket, :new, params) do
+    case Raffles.create_raffle(params) do
       {:ok, _raffle} ->
         socket =
           socket
