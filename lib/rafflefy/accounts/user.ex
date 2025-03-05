@@ -49,7 +49,7 @@ defmodule Rafflefy.Accounts.User do
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
-    |> validate_lenght(:username, min: 2, max: 25)
+    |> validate_length(:username, min: 2, max: 25)
     |> unsafe_validate_unique(:username, Rafflefy.Repo)
     |> unique_constraint(:username)
   end
