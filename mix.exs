@@ -70,7 +70,8 @@ defmodule Rafflefy.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.18.0", only: :test},
-      {:sobelow, "~> 0.13.0", only: :dev}
+      {:sobelow, "~> 0.13.0", only: :dev},
+      {:bcrypt_elixir, "~> 3.0"},
     ]
   end
 
