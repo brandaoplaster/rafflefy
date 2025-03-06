@@ -33,10 +33,11 @@ defmodule RafflefyWeb.Router do
   scope "/", RafflefyWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-
-    live "/admin/raffles", AdminRaffleLive.Index
-    live "/admin/raffles/new", AdminRaffleLive.Form, :new
-    live "/admin/raffles/:id/edit", AdminRaffleLive.Form, :edit
+    live_session :admin, on_mount: {RafflefyWeb.UserAuth, :ensure_authenticated} do
+      live "/admin/raffles", AdminRaffleLive.Index
+      live "/admin/raffles/new", AdminRaffleLive.Form, :new
+      live "/admin/raffles/:id/edit", AdminRaffleLive.Form, :edit
+    end
   end
 
   # Other scopes may use custom stacks.
