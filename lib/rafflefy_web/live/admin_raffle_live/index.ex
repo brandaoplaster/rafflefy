@@ -4,8 +4,6 @@ defmodule RafflefyWeb.AdminRaffleLive.Index do
   import RafflefyWeb.CustomComponents
   alias Rafflefy.Raffles
 
-  on_mount {RafflefyWeb.UserAuth, :ensure_authenticated}
-
   def mount(_params, _session, socket) do
     socket =
       socket
