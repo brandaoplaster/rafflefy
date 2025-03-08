@@ -31,7 +31,11 @@ defmodule RafflefyWeb.AdminRaffleLive.Index do
           </.link>
         </:actions>
       </.header>
-      <.table id="raffles" rows={@streams.raffles}>
+      <.table
+        id="raffles"
+        rows={@streams.raffles}
+        row_click={fn {_, raffle} -> JS.navigate(~p"/raffles/#{raffle}") end}
+      >
         <:col :let={{_dom_id, raffle}} label="Prize">
           <.link navigate={~p"/raffles/#{raffle}"}>
             <%= raffle.prize %>
