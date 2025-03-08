@@ -48,13 +48,18 @@ defmodule RafflefyWeb.AdminRaffleLive.Index do
             Edit
           </.link>
         </:action>
-        <:action :let={{_dom_id, raffle}}>
-          <.link phx-click="delete" phx-value-id={raffle.id} data-confirm="Are you sure?">
+        <:action :let={{dom_id, raffle}}>
+          <.link phx-click={delete_and_hide(dom_id, raffle)} data-confirm="Are you sure?">
             Delete
           </.link>
         </:action>
       </.table>
     </div>
     """
+  end
+
+  def delete_and_hide(dom_id, raffle) do
+    JS.push("delete", value: %{id: raffle.id})
+    |> JS.hide(to: "##{dom_id}", transition: "fade-out")
   end
 end
