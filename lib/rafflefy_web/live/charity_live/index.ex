@@ -2,39 +2,50 @@ defmodule RafflefyWeb.CharityLive.Index do
   use RafflefyWeb, :live_view
 
   alias Rafflefy.Charities
-  alias Rafflefy.Charities.Charity
+
+  @impl true
+  def render(assigns) do
+    ~H"""
+    <.header>
+      Listing Charities
+      <:actions>
+        <.button phx-click={JS.navigate(~p"/charities/new")}>
+          New Charity
+        </.button>
+      </:actions>
+    </.header>
+
+    <.table
+      id="charities"
+      rows={@streams.charities}
+      row_click={fn {_id, charity} -> JS.navigate(~p"/charities/#{charity}") end}
+    >
+      <:col :let={{_id, charity}} label="Name">{charity.name}</:col>
+      <:col :let={{_id, charity}} label="Slug">{charity.slug}</:col>
+      <:action :let={{_id, charity}}>
+        <div class="sr-only">
+          <.link navigate={~p"/charities/#{charity}"}>Show</.link>
+        </div>
+        <.link navigate={~p"/charities/#{charity}/edit"}>Edit</.link>
+      </:action>
+      <:action :let={{id, charity}}>
+        <.link
+          phx-click={JS.push("delete", value: %{id: charity.id}) |> hide("##{id}")}
+          data-confirm="Are you sure?"
+        >
+          Delete
+        </.link>
+      </:action>
+    </.table>
+    """
+  end
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :charities, Charities.list_charities())}
-  end
-
-  @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Charity")
-    |> assign(:charity, Charities.get_charity!(id))
-  end
-
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "New Charity")
-    |> assign(:charity, %Charity{})
-  end
-
-  defp apply_action(socket, :index, _params) do
-    socket
-    |> assign(:page_title, "Listing Charities")
-    |> assign(:charity, nil)
-  end
-
-  @impl true
-  def handle_info({RafflefyWeb.CharityLive.FormComponent, {:saved, charity}}, socket) do
-    {:noreply, stream_insert(socket, :charities, charity)}
+    {:ok,
+     socket
+     |> assign(:page_title, "Listing Charities")
+     |> stream(:charities, Charities.list_charities())}
   end
 
   @impl true

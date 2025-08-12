@@ -3,19 +3,36 @@ defmodule RafflefyWeb.CharityLive.Show do
 
   alias Rafflefy.Charities
 
+
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def render(assigns) do
+    ~H"""
+    <.header>
+      Charity {@charity.id}
+      <:subtitle>This is a charity record from your database.</:subtitle>
+      <:actions>
+        <.button phx-click={JS.dispatch("click", to: {:inner, "a"})}>
+          <.link navigate={~p"/charities/#{@charity}/edit?return_to=show"}>
+            Edit charity
+          </.link>
+        </.button>
+      </:actions>
+    </.header>
+
+    <.list>
+      <:item title="Name">{@charity.name}</:item>
+      <:item title="Slug">{@charity.slug}</:item>
+    </.list>
+
+    <.back navigate={~p"/charities"}>Back to charities</.back>
+    """
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
+  def mount(%{"id" => id}, _session, socket) do
+    {:ok,
      socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:page_title, "Show Charity")
      |> assign(:charity, Charities.get_charity!(id))}
   end
-
-  defp page_title(:show), do: "Show Charity"
-  defp page_title(:edit), do: "Edit Charity"
 end
